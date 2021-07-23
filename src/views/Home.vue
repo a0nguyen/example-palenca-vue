@@ -1,18 +1,38 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <iframe
+      :src="widgetUrl"
+      style="width:100%;border:none;height:100vh"
+    ></iframe>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import io from 'socket.io-client'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      widgetUrl: 'https://www.palenca.com/form/759c55b3', // this is a demo widget, use your widget url
+      socket: undefined
+    }
+  },
+  created () {
+    this.socket = io('https://socket.palenca.com/')
+  },
+  mounted () {
+    this.socket.on('data', (content) => this.onData(content))
+  },
+  beforeDestroy () {
+    this.socket.off('data')
+  },
+  methods: {
+    onData (content) {
+      const { user, platform } = content
+      console.log(`user with id ${user} conected with ${platform} `) // do something with the data
+      this.$router.push('thank-you')
+    }
   }
 }
 </script>

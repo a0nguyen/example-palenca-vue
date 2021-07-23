@@ -1,5 +1,8 @@
 # palenca-vue-sample
 
+This is a starter to integrate palenca's widget and its socket with vuejs
+
+You should change "widgetUrl" in /src/views/Home.vue with your widget url to make it work
 ## Project setup
 ```
 npm install
@@ -15,15 +18,3 @@ npm run serve
 npm run build
 ```
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
